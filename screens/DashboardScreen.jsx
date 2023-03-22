@@ -53,6 +53,9 @@ const getTotal= async () => {
           <Card  title={'Total Expenses'} amount={total.expense} />
           <Chart />
         </View>
+
+      
+
       </ScrollView>
     </SafeAreaView>
   )
