@@ -1,5 +1,7 @@
 import { View, Text, Dimensions, ScrollView } from 'react-native';
 import React from 'react';
+import * as SecureStore from 'expo-secure-store';
+import { useEffect,useState } from 'react';
 import {
     LineChart,
     BarChart,
@@ -11,30 +13,71 @@ import {
 
 
 const Chart = () => {
+  const [graph,setGraph]=useState({
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "jul",'aug','sept','oct','nov','dec'],
+    datasets: [
+      {
+        data:[12,12,12,12]
+      }
+    ]
+  })
+
+
+  useEffect(() => {
+  
+    
+const getGraph= async () => {
+  let token = await SecureStore.getItemAsync('token')
+  
+  
+    try {
+      const response = await fetch('http://192.168.0.106:8000/api/report/2023', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+       
+      });
+     
+      const data = await response.json();
+    let result=data[0].total
+    console.log(result)
+      
+      setGraph({
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "jul",'aug','sept','oct','nov','dec'],
+        datasets: [
+          {
+            data:result
+          }
+        ]
+      })
+      
+    } catch (error) {
+      
+      console.log(error);
+    
+    };
+    }
+    getGraph();
+  }, []);
   return (
     <ScrollView horizontal>
     <View className='mt-12 ml-2 '>
-      <Text>Bezier Line Chart</Text>
+      <Text className=' m-auto'>Yearly Graph.</Text>
   <LineChart
-    data={{
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "jul"],
-      datasets: [
-        {
-          data: [1000, 3000, 7000, 2000, 8000, 5000, 4000]
-        }
-      ]
-    }}
-    width={450} // from react-native
+    data={graph}
+    width={400} // from react-native
     height={220}
     yAxisLabel="$"
     yAxisSuffix=""
     yAxisInterval={1} // optional, defaults to 1
     chartConfig={{
-      backgroundColor: "#020024",
-      backgroundGradientFrom: "#3450b1",
-      backgroundGradientTo: "#00d4ff",
+      backgroundColor: "#ffffffff",
+      backgroundGradientFrom: "#000045",
+      backgroundGradientTo: "blue",
       decimalPlaces: 0, // optional, defaults to 2dp
-      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      color: (opacity = 1) => `rgba(255, 255,122, ${opacity})`,
       labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
       style: {
         borderRadius: 16

@@ -16,7 +16,7 @@ const LoginScreen = ({ navigation }) => {
   const handleLogin = async (values) => {
   
     try {
-      const response = await fetch('http://192.168.16.107:8000/api/login', {
+      const response = await fetch('http://192.168.0.106:8000/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -25,7 +25,12 @@ const LoginScreen = ({ navigation }) => {
       });
       const data = await response.json();
       // Save token to secure storage
-      await SecureStore.setItemAsync('token', data.token);
+      await SecureStore.setItemAsync('token', data.token)
+      let token = await SecureStore.getItemAsync('token')
+      console.log(token)
+      
+      
+
       // Navigate to DashboardScreen
       navigation.replace('DashboardScreen'); 
       

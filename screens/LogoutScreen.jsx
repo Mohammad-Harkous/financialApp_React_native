@@ -20,8 +20,8 @@ const LogoutScreen = ({navigation}) => {
     
 
   return (
-    <SafeAreaView>
-    <View className='flex w-20 h-10 items-center justify-center mt-72 ml-36 bg-[#2148C0] rounded '>
+    <SafeAreaView >
+    <View className='flex w-20 h-10 items-center justify-center mx-auto bg-[#2148C0] rounded '>
       <TouchableOpacity onPress={handleLogout}>
         <Text className='color-white'>Logout</Text>
       </TouchableOpacity>
