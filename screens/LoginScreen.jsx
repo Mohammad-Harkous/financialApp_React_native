@@ -26,7 +26,7 @@ const LoginScreen = ({ navigation }) => {
       const data = await response.json();
       // Save token to secure storage
       await SecureStore.setItemAsync('token', data.token);
-      // Navigate to DashboardScreen
+      // Navigate to DashboardScreen and we use "navigation.replace" to prevent the user from go back to the login screen
       navigation.replace('DashboardScreen'); 
       
       

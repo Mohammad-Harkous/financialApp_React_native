@@ -13,8 +13,13 @@ const DashboardScreen = () => {
           <Card title={'Total Earning'} amount={'40,500'} />
           <Card title={'Total Income'} amount={'80,500'} />
           <Card title={'Total Expenses'} amount={'40,000'} />
+
+        
           <Chart />
         </View>
+
+      
+
       </ScrollView>
     </SafeAreaView>
   )
