@@ -31,7 +31,7 @@ const getGraph= async () => {
   
   
     try {
-      const response = await fetch('http://192.168.0.106:8000/api/report/2023', {
+      const response = await fetch('http://192.168.0.107:8000/api/report/2023', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

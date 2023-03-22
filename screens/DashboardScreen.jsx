@@ -22,7 +22,7 @@ const getTotal= async () => {
   
   
     try {
-      const response = await fetch('http://192.168.0.106:8000/api/transaction/total', {
+      const response = await fetch('http://192.168.0.107:8000/api/transaction/total', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
